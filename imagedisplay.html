@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Looping to Display Images</title>
+    <style>
+        body {
+            font-family: Tahoma, Geneva, sans-serif;
+        }
+
+        fieldset {
+            width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        #form {
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            border: #999 2px dashed;
+            text-align: center;
+        }
+
+        input {
+            width: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div id="form">
+    How many pictures?
+    <br>
+    <input type="text" value="5" id="numPics">
+    <br>
+    <input type="button" value="Display" id="btn">
+</div>
+
+<fieldset>
+    <legend>While Loop (+1 Than the Number Specified)</legend>
+    <div id="while" class="imageHolder">
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend>Do While Loop (-1 Than the Number Specified)</legend>
+    <div id="dowhile" class="imageHolder">
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend>For Loop (Exactly the Number Specified)</legend>
+    <div id="for" class="imageHolder">
+    </div>
+</fieldset>
+
+<fieldset>
+    <label>
+        <input type="radio" name="pictureSelect" value="hk.jpg" checked/>
+        <img src="hk.jpg"/>
+    </label>
+    <br/>
+    <label>
+        <input type="radio" name="pictureSelect" value="dino.jpg"/>
+        <img src="dino.jpg"/>
+    </label>
+</fieldset>
+</body>
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script>
+    $(init);
+
+    function init() {
+        $("#btn").click(runLoops);
+    }
+
+    function runLoops() {
+        $(".imageHolder").empty();
+        var num = parseInt($("#numPics").val());
+
+        // Create a for loop that calls the function
+        // createImage("for") exactly the number of
+        // times as the amount in the variable "num"
+
+        // Place for loop here...
+        for (i=0; i< num; i++) {
+            createImage("for")
+        }
+
+        // Create a while loop that calls the function
+        // createImage("while") one more time than
+        // the amount in the variable "num" (i.e. num + 1)
+
+        // Place while loop here...
+        var j = 0;
+        while (j != num +1) { // replace false with your condition
+             createImage("while");
+            j++
+        }
+
+        // Create a do while loop that calls the function
+        // createImage("dowhile") one fewer times than
+        // the amount in the variable "num" (i.e. num 1 1)
+
+        // Place do while loop here...
+        var k = 0;
+        do {
+            createImage("dowhile");
+            k++
+        } while (k != num - 1); // replace false with your condition
+    }
+
+    function createImage(id) {
+        var fileName = $(":radio[name='pictureSelect']:checked").val();
+        // Create a new image element
+        var imageElement = $("<img>");
+        // Set its source attribute
+        imageElement.attr("src", fileName);
+        // Add it as a child of another element
+        $("#" + id).append(imageElement);
+    }
+</script>
+
+</html>
